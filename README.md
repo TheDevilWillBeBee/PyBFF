@@ -1,9 +1,9 @@
 # Python implementation of BrainFuck Family
 
 This repository is an attempt to reproduce the results of the following newly published paper:
-`Computational Life: How Well-formed,
+**Computational Life: How Well-formed,
 Self-replicating Programs Emerge from Simple
-Interaction`: [https://arxiv.org/pdf/2406.19108](https://arxiv.org/pdf/2406.19108)
+Interaction**: [https://arxiv.org/pdf/2406.19108](https://arxiv.org/pdf/2406.19108)
 
 The [original source code](https://github.com/paradigms-of-intelligence/cubff) is implemented using C++ and Cuda to
 achieve high performance.
@@ -29,8 +29,8 @@ python main.py
 
 * **emulator.py**: The `emulate` function in this file receives a _bytearray_ tape that contains a BrainFuck program and
   emulates it. You can pass `verbose=1` to see the state of the tape at each moment of
-  execution. The emulator also contains a simple self-replicating program which its executionis shown in the image
-  below ![State of the tape](data/tape_state.png)
+  execution. The emulator also contains a simple self-replicating program which its executions shown in the image
+  below: ![State of the tape](data/tape_state.png)
 
 * **metrics.py**: This file include the Shanon entropy and Lempel–Ziv compression functionalities which are required to
   calculate the _higher order entropy_ metric proposed in the original paper. The _brotli_ library is used for the
