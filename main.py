@@ -3,7 +3,7 @@ import argparse
 import random
 from multiprocessing import Pool, cpu_count
 
-from emulator import emulate
+from emulator import emulate, mutate
 from utils import print_tape
 from metrics import higher_order_entropy
 
@@ -23,6 +23,7 @@ def generate_random_program(length=64):
 def main(config):
     soup_size = config.soup_size
     program_size = config.program_size
+    mutation_rate = config.mutation_rate
     random.seed(config.random_seed)
     epochs = config.epochs
 
@@ -39,8 +40,8 @@ def main(config):
         finished_runs = 0
         terminated_runs = 0
         for (i, j), (tape, state, iteration, skipped) in zip(program_pairs, results):
-            programA_new = tape[:program_size]
-            programB_new = tape[program_size:]
+            programA_new = mutate(tape[:program_size], mutation_rate=mutation_rate)
+            programB_new = mutate(tape[program_size:], mutation_rate=mutation_rate)
             soup[i] = programA_new
             soup[j] = programB_new
 
