@@ -1,5 +1,5 @@
 import time
-
+import string
 
 def timeit(f):
     def timed(*args, **kw):
@@ -20,6 +20,8 @@ class bcolors:
     BLUE = '\033[0;30;44m'
     ENDC = '\033[0m'
 
+
+printable_chars = string.digits + string.ascii_letters + string.punctuation
 def print_tape(tape, head0_pos=0, head1_pos=0, pc_pos=0, skip_non_instruction=True):
     """
     Print the bytestring tape and color the positions of the read head, write head and program counter
@@ -35,6 +37,8 @@ def print_tape(tape, head0_pos=0, head1_pos=0, pc_pos=0, skip_non_instruction=Tr
             char = ' '
         else:
             char = chr(byte)
+            if char not in printable_chars:
+                char = ' '
 
         if i == head0_pos:
             print(bcolors.BLUE + char + bcolors.ENDC, end="")
@@ -43,5 +47,6 @@ def print_tape(tape, head0_pos=0, head1_pos=0, pc_pos=0, skip_non_instruction=Tr
         elif i == pc_pos:
             print(bcolors.GREEN + char + bcolors.ENDC, end="")
         else:
-            print(f"{char}", end="")
+            # print(bcolors.YELLOW + char + bcolors.ENDC, end="")
+            print(char, end="")
     print("")

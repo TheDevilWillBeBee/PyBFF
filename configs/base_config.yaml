@@ -1,0 +1,9 @@
+random_seed: 52             # Random seed for reproducibility
+soup_size: 4096            # Number of programs in the primordial soup (2 ** 14)
+program_size: 64            # Number of bytes in a program
+epochs: 100000              # Number of epochs to update the soup
+
+read_head_position: 0       # Position of the read head in the beginning of execution
+write_head_position: 64     # Position of the write head in the beginning of execution
+eval_interval: 10           # Interval to evaluate the metrics
+num_print_programs: 10      # Number of programs to print Once the higher order entropy > 1.0

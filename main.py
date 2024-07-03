@@ -1,9 +1,15 @@
+import yaml
+import argparse
 import random
 from multiprocessing import Pool, cpu_count
 
 from emulator import emulate
 from utils import print_tape
 from metrics import higher_order_entropy
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--config', type=str, default='configs/base_config.yaml', help="configuration")
+
 
 
 def generate_random_program(length=64):
@@ -13,25 +19,20 @@ def generate_random_program(length=64):
         return bytearray([random.randint(0, 256) for i in range(length)])
 
 
-if __name__ == '__main__':
-    soup_size = 2 ** 14
-    program_size = 32
-    random.seed(52)
-    soup = [generate_random_program(program_size) for _ in range(soup_size)]
 
-    # soup[0] = bytearray(b"[[{.>]-]                                                ]-]>.{[[")
-    # for i in range(1):
-    #     soup[i] = bytearray(b"[[{.>]-]                ]-]>.{[[")
+def main(config):
+    soup_size = config.soup_size
+    program_size = config.program_size
+    random.seed(config.random_seed)
+    epochs = config.epochs
 
-    iterations = 1024 * 1024
-    for step in range(iterations):
-        #
+    soup = [generate_random_program(program_size) for _ in range(config.soup_size)]
+    for epoch in range(epochs):
         perm = list(range(soup_size))
         random.shuffle(perm)
-
         program_pairs = [(perm[i], perm[i + 1]) for i in range(0, soup_size, 2)]
         with Pool(cpu_count()) as pool:
-            results = pool.starmap(emulate, [(soup[i] + soup[j],) for i, j in program_pairs])
+            results = pool.starmap(emulate, [(soup[i] + soup[j], 0, program_size) for i, j in program_pairs])
 
         total_iterations = 0
         total_skipped = 0
@@ -49,18 +50,31 @@ if __name__ == '__main__':
             finished_runs += (state == "Finished") * 1.0
             terminated_runs += (state == "Terminated") * 1.0
 
-
         total_skipped /= len(program_pairs)
         total_iterations /= len(program_pairs)
         terminated_runs /= len(program_pairs)
         finished_runs /= len(program_pairs)
 
-        if step % 100 == 0:
+        if epoch % config.eval_interval == 0:
             flat_soup = b''.join(soup)
             hoe = higher_order_entropy(flat_soup)
-            print(f"Iteration: {step}, "
-                  f" Higher Order Entropy =  {hoe:.3f},"
-                  f"\n\tAvg Iters = {total_iterations:.3f},"
-                  f"\tAvg Skips = {total_skipped:.3f},"
-                  f"\tAvg Finished = {finished_runs:.3f},"
-                  f"\tAvg Terminated = {terminated_runs:.3f}")
+            print(f"Epoch: {epoch}"
+                  f"\n\tHigher Order Entropy={hoe:.3f},"
+                  f"\tAvg Iters={total_iterations:.3f},"
+                  f"\tAvg Skips={total_skipped:.3f},"
+                  f"\tFinished Ratio={finished_runs:.3f},"
+                  f"\tTerminated Ratio={terminated_runs:.3f}")
+
+            if hoe > 1.0:
+                print(f"The first {config.num_print_programs} programs:")
+                for program_idx in range(config.num_print_programs):
+                    print_tape(soup[program_idx], skip_non_instruction=False)
+
+
+if __name__ == '__main__':
+    args = parser.parse_args()
+    with open(args.config, 'r') as f:
+        config = yaml.load(f, Loader=yaml.FullLoader)
+
+    config = argparse.Namespace(**config)
+    main(config)

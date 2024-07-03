@@ -18,6 +18,7 @@ jump changes to position of the instruction head
     [ if (tape[head0] == 0): jump forwards to matching ] command.
     ] if (tape[head0] != 0): jump backwards to matching [ command.
 """
+import string
 
 from utils import timeit, print_tape
 
@@ -99,7 +100,7 @@ def emulate(tape, head0_pos=0, head1_pos=0, pc_pos=0, max_iter=2 ** 13, verbose=
 
         if verbose > 0:
             print(f"Iteration: {iteration:05}", end="\t\t")
-            print_tape(tape, head0_pos, head1_pos, pc_pos)
+            print_tape(tape, head0_pos, head1_pos, pc_pos, False)
 
         iteration += 1
         pc_pos = pc_pos + 1
@@ -115,10 +116,6 @@ if __name__ == "__main__":
     program2 = bytearray(b"0" * len(program1))
     tape = program1 + program2
 
-    # random_program1 = generate_random_program(32)
-    # random_program2 = generate_random_program(32)
-    # tape = random_program1 + random_program2
-
-    tape, state, iteration, skipped = emulate(tape, verbose=1)
+    tape, state, iteration, skipped = emulate(tape, verbose=1, max_iter=1024)
 
     print(state, iteration, skipped)
