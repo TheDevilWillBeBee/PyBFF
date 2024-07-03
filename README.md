@@ -34,20 +34,7 @@ python main.py --config configs/base_config.yaml
   B. In this way, the two programs are treated with more symmetry, and I found that this speeds up the emergence of the
   self-replicating programs. These settings can be changed in the config file.
 
-## Description of the files
 
-* **emulator.py**: The `emulate` function in this file receives a _bytearray_ tape that contains a BrainFuck program and
-  emulates it. You can pass `verbose=1` to see the state of the tape at each moment of
-  execution. The emulator also contains a simple self-replicating program which its executions shown in the image
-  below: ![State of the tape](data/tape_state.png)
-
-* **metrics.py**: This file include the Shanon entropy and Lempel–Ziv compression functionalities which are required to
-  calculate the _higher order entropy_ metric proposed in the original paper. The _brotli_ library is used for the
-  compression algorithms.
-* **utils.py**: This function includes the `print_tape` utility function that allows you to print the state of a
-  program. The read and write heads are highlighted using the blue and red colors and the instruction pointer is
-  highlighted using green.
-  in the paper.
 
 ## Notes
 
@@ -62,6 +49,21 @@ python main.py --config configs/base_config.yaml
   execution by the number of cpu cores available. On my workstation with an Intel i7-13700K, and given a soup of 2**17
   programs with 64 bytes each, each update step takes roughly 1.2 seconds.
 * The `random.randbytes` method was introduced in Python 3.9.
+
+## Description of the files
+
+* **emulator.py**: The `emulate` function in this file receives a _bytearray_ tape that contains a BrainFuck program and
+  emulates it. You can pass `verbose=1` to see the state of the tape at each moment of
+  execution. The emulator also contains a simple self-replicating program which its executions shown in the image
+  below: ![State of the tape](data/tape_state.png)
+
+* **metrics.py**: This file include the Shanon entropy and Lempel–Ziv compression functionalities which are required to
+  calculate the _higher order entropy_ metric proposed in the original paper. The _brotli_ library is used for the
+  compression algorithms.
+* **utils.py**: This function includes the `print_tape` utility function that allows you to print the state of a
+  program. The read and write heads are highlighted using the blue and red colors and the instruction pointer is
+  highlighted using green.
+  in the paper.
 
 ## TODO List
 
