@@ -42,8 +42,7 @@ python main.py
 
 ## Notes
 
-* I use the notion of compressibility `1.0 - (compressed_size / original_size)` to calculate the _Higher Order Entropy_.
-  This creates a +1 offset in the metrics I calculate, compared to the original paper.
 * I use python's default multiprocessing to speed up the execution of programs in each epoch. This speeds up the
   execution by the number of cpu cores available. On my workstation with an Intel i7-13700K, and given a soup of 2**17
   programs with 64 bytes each, each update step takes roughly 1.2 seconds.
+* The `random.randbytes` method was introduced in Python 3.9.
