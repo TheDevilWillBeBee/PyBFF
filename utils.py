@@ -1,6 +1,7 @@
 import time
 import string
 
+
 def timeit(f):
     def timed(*args, **kw):
         ts = time.time()
@@ -22,6 +23,8 @@ class bcolors:
 
 
 printable_chars = string.digits + string.ascii_letters + string.punctuation
+
+
 def print_tape(tape, head0_pos=0, head1_pos=0, pc_pos=0, skip_non_instruction=True):
     """
     Print the bytestring tape and color the positions of the read head, write head and program counter
