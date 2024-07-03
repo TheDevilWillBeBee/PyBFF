@@ -51,12 +51,13 @@ python main.py --config configs/base_config.yaml
 
 ## Notes
 
-* **Contrary to the original paper, I set the initial position of the write_head to 64.** This means that in the
-  beginning
-  of the execution the read head points to the start of program A and the write head points to the start of the program
-  B. In this way, **the two programs are treated with more symmetry**, and I found that this speeds up the emergence of
-  the
-  self-replicating programs. These settings can be changed in the config file.
+* Since python is much slower than c++ and cuda, I have tried to reduce the computational requirements of the simulation
+  to make the experiments run in reasonable time. For starter, I have decreased the soup size and the maximum number of
+  iterations per program execution. I have also found that placing the write head in the middle of the tape, i.e. at the
+  start of the second program, speeds up the emergence of self-replicating programs.
+* The check for the programs validity (correct `[` and `]` brackets) is done during the execution of the program. Hence,
+  If a program is invalid, the instructions before reaching the invalid brackets are still executed and the soup is
+  still updated.
 * I use python's default multiprocessing to speed up the execution of programs in each epoch. This speeds up the
   execution by the number of cpu cores available. On my workstation with an Intel i7-13700K, and given a soup of 2**17
   programs with 64 bytes each, each update step takes roughly 1.2 seconds.
@@ -64,5 +65,5 @@ python main.py --config configs/base_config.yaml
 
 ## TODO List
 
-* Implement the tracer functionality. 
+* Implement the tracer functionality.
 * Implement mutations. 
