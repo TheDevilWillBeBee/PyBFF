@@ -27,14 +27,12 @@ python main.py --config configs/base_config.yaml
 
 * The base_config simulation uses a soup size of 16384 programs (8 times smaller than the original configuration) with
   64 bytes each. The first self-replicating program
-  emerges between iteration 140-150 epochs and one of its mutations has the following
-  structure: `.0 e  VnQ n   t C         [  < "O   Kh { T , k 5 o3 + 0`. Note that this program is not a palindrome.
-  Contrary to the original paper, I set the initial position of the write_head to 64. This means that in the beginning
-  of the execution the read head points to the start of program A and the write head points to the start of the program
-  B. In this way, the two programs are treated with more symmetry, and I found that this speeds up the emergence of the
-  self-replicating programs. These settings can be changed in the config file.
-
-
+  emerges between iteration 240-250 epochs and one of its mutations has the following
+  structure: `.Z     [o<J {TT,,    ]G/H    B     u  P_      F  q~- 5I    K/`. Note that this program is not a
+  palindrome. Contrary to the original paper, I set the initial position of the write_head to 64. This means that in the
+  beginning of the execution the read head points to the start of program A and the write head points to the start of
+  the program B. In this way, the two programs are treated with more symmetry, which seems to speed up the
+  emergence of the self-replicating programs. These settings can be changed in the config file.
 
 ## Notes
 
@@ -68,4 +66,4 @@ python main.py --config configs/base_config.yaml
 ## TODO List
 
 * Implement the tracer functionality.
-* Implement mutations. 
+* ~~Implement mutations.~~ :white_check_mark:

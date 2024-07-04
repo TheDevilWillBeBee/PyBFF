@@ -3,7 +3,7 @@ import argparse
 import random
 from multiprocessing import Pool, cpu_count
 
-from emulator import emulate 
+from emulator import emulate
 from utils import print_tape, mutate
 from metrics import higher_order_entropy
 
@@ -11,13 +11,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--config', type=str, default='configs/base_config.yaml', help="configuration")
 
 
-
 def generate_random_program(length=64):
     try:
         return bytearray(random.randbytes(length))
     except:
         return bytearray([random.randint(0, 256) for i in range(length)])
-
 
 
 def main(config):
