@@ -8,7 +8,7 @@ from utils import print_tape, mutate
 from metrics import higher_order_entropy
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config', type=str, default='configs/base_config.yaml', help="configuration")
+parser.add_argument('--config', type=str, default='configs/small_config.yaml', help="configuration")
 
 
 def generate_random_program(length=64):

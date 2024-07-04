@@ -25,14 +25,21 @@ The `main.py` includes a minimal implementation of the primordial soup and its u
 python main.py --config configs/base_config.yaml
 ```
 
-* The base_config simulation uses a soup size of 16384 programs (8 times smaller than the original configuration) with
-  64 bytes each. The first self-replicating program
-  emerges between iteration 240-250 epochs and one of its mutations has the following
-  structure: `.Z     [o<J {TT,,    ]G/H    B     u  P_      F  q~- 5I    K/`. Note that this program is not a
-  palindrome. Contrary to the original paper, I set the initial position of the write_head to 64. This means that in the
+### Configs
+
+* Contrary to the original paper, I set the initial position of the write_head to `program_size`. This means that in the
   beginning of the execution the read head points to the start of program A and the write head points to the start of
   the program B. In this way, the two programs are treated with more symmetry, which seems to speed up the
-  emergence of the self-replicating programs. These settings can be changed in the config file.
+  emergence of the self-replicating programs. Also, this change allows non-palindrome self-replicating programs to
+  emerge.
+
+* **base_config.yaml** This simulation uses a soup size of 16384 programs with 64 bytes each and a mutation rate of
+  0.00012. The first self-replicating program emerges between epoch 240 and 250. The following program shows one of the
+  mutations the self-replicating program that emerged : `.Z     [o<J {TT,,    ]G/H    B     u  P_      F  q~- 5I    K/`.
+* **small_config.yaml** This simulation uses a soup size of 4096 programs with 32 bytes each and a mutation rate of
+  0.001. The first self-replicating program emerges between epoch 13900 and 14000. The following program shows one of
+  the
+  mutations the self-replicating program that emerged : `. 4 .p     [2:      M =|< {, ]`.
 
 ## Notes
 
