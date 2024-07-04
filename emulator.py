@@ -18,7 +18,6 @@ jump changes to position of the instruction head
     [ if (tape[head0] == 0): jump forwards to matching ] command.
     ] if (tape[head0] != 0): jump backwards to matching [ command.
 """
-import random
 import string
 
 from utils import timeit, print_tape
@@ -110,20 +109,6 @@ def emulate(tape, head0_pos=0, head1_pos=0, pc_pos=0, max_iter=2 ** 13, verbose=
             break
 
     return tape, state, iteration, skipped
-
-def mutate(tape, mutation_rate=0):
-    # Don't mutate if rate is 0
-    if not mutation_rate:
-        return tape
-
-    mask = [random.random() < mutation_rate for _ in range(len(tape))]
-    random_bytes = random.randbytes(len(tape))
-
-    for i in range(len(tape)):
-        if mask[i]:
-            tape[i] = random_bytes[i]
-
-    return tape
 
 if __name__ == "__main__":
     program1 = bytearray(b"[[{.>]-]                ]-]>.{[[")

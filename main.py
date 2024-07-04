@@ -3,8 +3,8 @@ import argparse
 import random
 from multiprocessing import Pool, cpu_count
 
-from emulator import emulate, mutate
-from utils import print_tape
+from emulator import emulate 
+from utils import print_tape, mutate
 from metrics import higher_order_entropy
 
 parser = argparse.ArgumentParser()
