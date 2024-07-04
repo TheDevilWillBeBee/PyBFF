@@ -35,11 +35,11 @@ python main.py --config configs/base_config.yaml
 
 * **base_config.yaml** This simulation uses a soup size of 16384 programs with 64 bytes each and a mutation rate of
   0.00012. The first self-replicating program emerges between epoch 240 and 250. The following program shows one of the
-  mutations the self-replicating program that emerged : `.Z     [o<J {TT,,    ]G/H    B     u  P_      F  q~- 5I    K/`.
+  mutations the self-replicating program that emerged : `.Z     [o<J {TT,,    ]G/H    B     u  P_      F  q~- 5I    K/`
 * **small_config.yaml** This simulation uses a soup size of 4096 programs with 32 bytes each and a mutation rate of
   0.001. The first self-replicating program emerges between epoch 13900 and 14000. The following program shows one of
   the
-  mutations the self-replicating program that emerged : `. 4 .p     [2:      M =|< {, ]`.
+  mutations the self-replicating program that emerged : `. 4 .p     [2:      M =|< {, ]`
 
 ## Notes
 
