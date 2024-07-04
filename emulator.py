@@ -110,7 +110,6 @@ def emulate(tape, head0_pos=0, head1_pos=0, pc_pos=0, max_iter=2 ** 13, verbose=
 
     return tape, state, iteration, skipped
 
-
 if __name__ == "__main__":
     program1 = bytearray(b"[[{.>]-]                ]-]>.{[[")
     program2 = bytearray(b"0" * len(program1))

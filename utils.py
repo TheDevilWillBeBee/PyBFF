@@ -1,6 +1,6 @@
 import time
+import random
 import string
-
 
 def timeit(f):
     def timed(*args, **kw):
@@ -53,3 +53,18 @@ def print_tape(tape, head0_pos=0, head1_pos=0, pc_pos=0, skip_non_instruction=Tr
             # print(bcolors.YELLOW + char + bcolors.ENDC, end="")
             print(char, end="")
     print("")
+
+
+def mutate(tape, mutation_rate=0):
+    # Don't mutate if rate is 0
+    if not mutation_rate:
+        return tape
+
+    mask = [random.random() < mutation_rate for _ in range(len(tape))]
+    random_bytes = random.randbytes(len(tape))
+
+    for i in range(len(tape)):
+        if mask[i]:
+            tape[i] = random_bytes[i]
+
+    return tape
