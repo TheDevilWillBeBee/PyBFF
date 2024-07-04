@@ -67,7 +67,7 @@ def main(config):
             if hoe > 1.0:
                 print(f"The first {config.num_print_programs} programs:")
                 for program_idx in range(config.num_print_programs):
-                    print_tape(soup[program_idx], skip_non_instruction=False)
+                    print_tape(soup[program_idx], -1, -1, -1, skip_non_instruction=False)
 
 
 if __name__ == '__main__':
