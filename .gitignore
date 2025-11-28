@@ -9,6 +9,7 @@
 *.txt
 *.zip
 *.png
+logs/
 
 pretrained_models/
 out/
